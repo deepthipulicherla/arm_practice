@@ -1,0 +1,4 @@
+workloads:
+  - vulken_rotate_triangle
+  - open_gles_shadow
+  -

@@ -1,0 +1,10 @@
+STEP 1 : Install pip install -r requrements.txt
+for parallel execution :
+#simulates running 4 gpu workloads in parallel
+    pytest -n 4
+
+for debug mode
+pytest -vv -s --pdb --disable-warnings
+pytest -vv -s  --alluredir=allure-results
+**** serve results ****
+allure serve allure-results
