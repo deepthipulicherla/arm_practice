@@ -8,8 +8,9 @@ import allure
 @allure.description("Gpu hang test simulation")
 @allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.regression
-def test_gpu_hang(gpu_env):
-    log_file = "test_logs/system.log"
+def test_gpu_hang(tmp_path, gpu_env):
+    log_file = tmp_path / "system.log"
+    log_file.write_text("")
 
     #simple workload (just sleeps)
     def workload():
