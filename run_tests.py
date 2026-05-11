@@ -22,15 +22,15 @@ def main():
         run("allure serve allure-results")
 
     elif mode == "smoke":
-        run("pytest -m smoke -vv -s --allure-dir=allure-results")
+        run("pytest -m smoke -vv -s --alluredir=allure-results")
         run("allure serve allure-results")
 
     elif mode == "jenkins":
         print("Jenkins mode")
-        run("pytest -vv -s --alluredir=allure-results")
+        run("pytest -vv -s  --alluredir=allure-results")
 
     else:
-        run("pytest -vv -s  --allure-dir=allure-results")
+        run("pytest -vv -s --alluredir=allure-results")
         run("allure serve allure-results")
 
 if __name__ == "__main__":
