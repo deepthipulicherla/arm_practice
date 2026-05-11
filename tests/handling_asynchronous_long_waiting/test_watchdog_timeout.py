@@ -1,0 +1,29 @@
+import threading
+import time
+import pytest
+import allure
+from utils.polling.watchdog import watchdog
+
+@allure.title("GPU TIMEOUT")
+@allure.description("check for the gpu workoad timeout")
+@allure.severity(allure.severity_level.CRITICAL)
+@pytest.mark.regression
+def test_watchdog_timeout(tmp_path, gpu_env):
+    log_file = tmp_path / "system.log"
+    log_file.write_text("")
+
+    # workload that runs too long
+    def long_workload():
+        time.sleep(999)
+
+    t = threading.Thread(target=long_workload)
+    t.start()
+
+    wd = watchdog(t, str(log_file), timeout=2)
+    t_wd = wd.start()
+
+    t.join(timeout=3)
+    wd.stopflag = True
+    t_wd.join()
+
+    assert wd.error == "Timeout"

@@ -3,3 +3,4 @@ pytest_xdist
 pyYAML
 pytest-rerunfailures
 allure-pytest
+pytest-timeout==2.3.1

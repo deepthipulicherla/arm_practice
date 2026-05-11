@@ -4,7 +4,12 @@ from utils.logger import get_workload_logger
 
 #simulate gpu workload by validating fps
 def run_workload(name):
-    time.sleep(1)
+    if name =="bigtime":
+        for i in range(21):
+            time.sleep(1)
+    else:
+        time.sleep(1)
+
     #validate fps
     fps = random.randint(50,120)
     log = get_workload_logger()
