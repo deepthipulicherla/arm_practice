@@ -27,7 +27,7 @@ def main():
 
     elif mode == "jenkins":
         print("Jenkins mode")
-        run("pytest -vv -s --maxfail=1 --alluredir=allure-results")
+        run("pytest -vv -s --alluredir=allure-results")
 
     else:
         run("pytest -vv -s  --allure-dir=allure-results")
