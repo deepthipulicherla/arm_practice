@@ -34,8 +34,8 @@ pipeline {
                 always()
             }
             steps {
-                archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
                 archiveArtifacts artifacts: 'allure-results/**', fingerprint: true
+                archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
             }
         }
     }
