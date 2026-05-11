@@ -26,10 +26,11 @@ def main():
         run("allure serve allure-results")
 
     elif mode == "jenkins":
-        run("pytest -vv -s --alluredir=allure-results")
+        print("Jenkins mode")
+        run("pytest -vv -s --maxfail=1 --alluredir=allure-results")
 
     else:
-        run("pytest -vv -s --allure-dir=allure-results")
+        run("pytest -vv -s  --allure-dir=allure-results")
         run("allure serve allure-results")
 
 if __name__ == "__main__":
