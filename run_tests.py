@@ -25,6 +25,9 @@ def main():
         run("pytest -m smoke -vv -s --allure-dir=allure-results")
         run("allure serve allure-results")
 
+    elif mode == "jenkins":
+        run("pytest -vv -s --alluredir=allure-results")
+
     else:
         run("pytest -vv -s --allure-dir=allure-results")
         run("allure serve allure-results")
