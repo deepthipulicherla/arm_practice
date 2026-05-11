@@ -21,28 +21,32 @@ pipeline {
         }
 
         stage('Publish Allure Report') {
-            when {
-                always()
-            }
             steps {
                 allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+            }
+            post {
+                always {
+                    echo "Allure report published (even if tests failed)."
+                }
             }
         }
 
         stage('Archive Allure Report') {
-            when {
-                always()
-            }
             steps {
                 archiveArtifacts artifacts: 'allure-results/**', fingerprint: true
                 archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
+            }
+            post {
+                always {
+                    echo "Allure artifacts archived."
+                }
             }
         }
     }
 
     post {
         always {
-            echo "Build finished. Allure report archived."
+            echo "Build finished."
         }
         success {
             echo "Build succeeded."
