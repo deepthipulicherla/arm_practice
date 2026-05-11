@@ -3,3 +3,5 @@ allure-results
 test_logs
 venv
 .idea
+__pycache__/
+*.pyc
