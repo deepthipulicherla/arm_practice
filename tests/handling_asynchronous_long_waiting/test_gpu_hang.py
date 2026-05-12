@@ -8,34 +8,33 @@ import allure
 @allure.description("Gpu hang test simulation")
 @allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.regression
-@pytest.mark.skip(reason="Feature not supported yet")
+#@pytest.mark.skip(reason="Feature not supported yet")
 def test_gpu_hang(tmp_path, gpu_env):
     log_file = tmp_path / "system.log"
     log_file.write_text("")
 
-    #simple workload (just sleeps)
     def workload():
-        time.sleep(5)
+        time.sleep(2)
 
     t = threading.Thread(target=workload)
     t.start()
 
-    #write GPU HANG after 1 sec
     def inject_hang():
-        time.sleep(1)
-        with open(log_file,'a') as f:
+        time.sleep(0.5)
+        with open(log_file, "a") as f:
             f.write("GPU HANG\n")
 
     threading.Thread(target=inject_hang).start()
 
-    wd = watchdog(t,str(log_file),timeout=10)
+    wd = watchdog(t, str(log_file), timeout=5)
     t_wd = wd.start()
 
-    t.join()
-    wd.stopflag =  True
-    t_wd.join()
+    t.join(timeout=3)
+    wd.stopflag = True
+    t_wd.join(timeout=1)
 
     assert wd.error == "GPU HANG DETECTED"
+
 
 
 

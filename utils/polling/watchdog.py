@@ -11,7 +11,6 @@ class watchdog:
         self.error = None
 
     def _safe_kill(self):
-        """Kill subprocess if available. Threads cannot be killed."""
         if hasattr(self.process, "kill"):
             self.process.kill()
 
@@ -27,17 +26,18 @@ class watchdog:
 
             # GPU hang
             try:
-                if "GPU HANG" in open(self.log_path).read():
-                    self.error = "GPU HANG DETECTED"
-                    self._safe_kill()
-                    break
+                with open(self.log_path, "r") as f:
+                    if "GPU HANG" in f.read():
+                        self.error = "GPU HANG DETECTED"
+                        self._safe_kill()
+                        break
             except FileNotFoundError:
                 pass
 
-            time.sleep(0.2)
+            time.sleep(0.1)
 
     def start(self):
-        t = threading.Thread(target=self.monitor)   # FIXED
-        t.daemon = True
+        t = threading.Thread(target=self.monitor)
+        t.daemon = False
         t.start()
         return t
