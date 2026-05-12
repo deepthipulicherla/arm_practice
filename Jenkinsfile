@@ -15,7 +15,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 bat '''
-                    python run_tests.py jenkins
+                    python run_tests.py jenkin
                 '''
             }
         }

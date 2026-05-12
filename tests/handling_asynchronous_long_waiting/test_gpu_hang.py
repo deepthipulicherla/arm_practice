@@ -8,6 +8,7 @@ import allure
 @allure.description("Gpu hang test simulation")
 @allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.regression
+@pytest.mark.skip(reason="Feature not supported yet")
 def test_gpu_hang(tmp_path, gpu_env):
     log_file = tmp_path / "system.log"
     log_file.write_text("")

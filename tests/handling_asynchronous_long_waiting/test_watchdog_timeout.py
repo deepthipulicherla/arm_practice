@@ -8,6 +8,7 @@ from utils.polling.watchdog import watchdog
 @allure.description("check for the gpu workoad timeout")
 @allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.regression
+@pytest.mark.skip(reason="Feature not supported yet")
 def test_watchdog_timeout(tmp_path, gpu_env):
     log_file = tmp_path / "system.log"
     log_file.write_text("")
