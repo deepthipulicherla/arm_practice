@@ -40,7 +40,8 @@ def main():
 
     else:
         run("pytest -vv -s --alluredir=allure-results")
-        run("allure serve allure-results")
+        #run("allure serve allure-results")
+        generate_allure_report()
 
 if __name__ == "__main__":
     main()
